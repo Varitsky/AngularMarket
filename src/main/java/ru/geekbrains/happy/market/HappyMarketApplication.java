@@ -9,3 +9,5 @@ public class HappyMarketApplication {
 		SpringApplication.run(HappyMarketApplication.class, args);
 	}
 }
+
+
