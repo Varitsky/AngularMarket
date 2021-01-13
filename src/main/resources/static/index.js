@@ -34,15 +34,32 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
             });
     };
 
-    $scope.deleteProductById = function (p) {
-        $http({
-            url: contextPath + '/delete/' + p,
-            method: 'GET'
-            })
-        .then(function (response) {
-            $scope.fillTable();
-        });
-    };
+//    $scope.deleteProductById = function (p) {
+//        $http({
+//            url: contextPath + '/delete/' + p,
+//            method: 'GET'
+//            })
+//        .then(function (response) {
+//            $scope.fillTable();
+//        });
+//    };
+
+//    $scope.deleteProductById = function (p) {
+//        $http({
+//            url: contextPath + '/' + p,
+//            method: 'DELETE'
+//            })
+//        .then(function (response) {
+//            $scope.fillTable();
+//        });
+//    };
+
+        $scope.deleteProductById = function (productId) {
+            $http.delete(contextPath + '/' + productId)
+            .then(function (response) {
+                $scope.fillTable();
+            });
+        };
 
 
 //scope.incrementItem = function (bookId) {
