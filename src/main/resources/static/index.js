@@ -34,5 +34,36 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
             });
     };
 
+    $scope.deleteProductById = function (p) {
+        $http({
+            url: contextPath + '/delete/' + p,
+            method: 'GET'
+            })
+        .then(function (response) {
+            $scope.fillTable();
+        });
+    };
+
+
+//scope.incrementItem = function (bookId) {
+//$http({
+//url: contextPath + '/api/v1/cart/add/' + bookId,
+//method: 'GET'
+//}).then(function (response) {
+//$scope.cartContentRequest();
+//});
+//};
+
+
+//        $scope.deleteProductById = function (p) {
+//            $http.get(`${contextPath}/delete/${p.id}`)
+//                .then(function (response) {
+//                    $scope.fillTable();
+//                });
+//        };
+
+
+
+
     $scope.fillTable();
 });

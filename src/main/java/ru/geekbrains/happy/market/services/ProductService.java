@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class ProductService {
+public class  ProductService {
     private final ProductRepository productRepository;
 
     public Optional<Product> findProductById(Long id) {
@@ -27,5 +27,9 @@ public class ProductService {
 
     public Product saveOrUpdate(Product product) {
         return productRepository.save(product);
+    }
+
+    public void deleteProductById(Long id){
+        productRepository.deleteById(id);
     }
 }

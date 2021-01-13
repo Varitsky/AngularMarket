@@ -33,7 +33,14 @@ public class ProductController {
 
     @PostMapping
     public Product saveNewProduct(@RequestBody Product product) {
-        product.setId(null);
+//        product.setId(null);
         return productService.saveOrUpdate(product);
     }
+
+    @GetMapping("/delete/{id}")
+    public void deleteProductById(@PathVariable Long id) {
+        productService.deleteProductById(id);
+    }
+
+
 }
