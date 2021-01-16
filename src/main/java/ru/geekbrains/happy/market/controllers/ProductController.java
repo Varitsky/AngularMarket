@@ -55,22 +55,50 @@ public class ProductController {
         return productService.findProductById(id).get();
     }
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Product saveNewProduct(@RequestBody Product product) {
-        product.setId(null);
-        return productService.saveOrUpdate(product);
-    }
-
     @DeleteMapping("/{id}")
     public void deleteProductById(@PathVariable Long id) {
         productService.deleteProductById(id);
     }
 
-    @PutMapping
-    public Product updateProduct(@RequestBody Product product){
-        return productService.saveOrUpdate(product);
+//    @PostMapping
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public Product saveNewProduct(@RequestBody Product product) {
+//        product.setId(null);
+//        return productService.saveOrUpdate(product);
+//    }
+
+    //    @PutMapping
+//    public Product updateProduct(@RequestBody Product product){
+//        return productService.saveOrUpdate(product);
+//    }
+
+
+    public ProductDto mapToProductDto(Product p){
+        ProductDto dto = new ProductDto();
+        dto.setTitle(p.getTitle());
+        dto.setPrice(p.getPrice());
+        return dto;
     }
 
+    public Product mapToProductEntity(ProductDto dto){
+        Product p = new Product();
+        p.setTitle(dto.getTitle());
+        p.setPrice(dto.getPrice());
+        return p;
+    }
 
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Product saveNewProduct(@RequestBody ProductDto productDto) {
+        return productService.saveOrUpdate(mapToProductEntity(productDto));
+    }
+
+    @PutMapping
+    public Product updateProduct(@RequestBody ProductDto dto){
+        Long id = dto.getId();
+        Product tempProduct = findProductById(id);
+        tempProduct.setTitle(dto.getTitle());
+        tempProduct.setPrice(dto.getPrice());
+        return productService.saveOrUpdate(tempProduct);
+    }
 }
